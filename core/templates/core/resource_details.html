@@ -1,0 +1,85 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block resource_details %}
+<section id="about" class="about section mt-5">
+
+    <!-- Section Title -->
+    <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-4 justify-content-center">
+  
+        <!-- Left Column (3 columns) -->
+        <div class="col-lg-2 col-md-2 bg-light fs-22"> 
+          <p >Basics of PIP</p>
+        </div>
+  
+        <!-- Right Column (9 columns) -->
+        <div class="col-lg-10 col-md-10 content">
+         
+                <h1>What is PIP & Why It Is Needed?</h1>
+                <ul>
+                    <li>Python comes as standard distribution, but Python has a huge community, and every package cannot be given in standard distribution; otherwise, its size would be increased.</li>
+                    <li>Hence, Python provides a tool named PIP (Package Installer for Python), using which we can install and manage additional packages and libraries. So, PIP is a package manager in Python.</li>
+                    <li>While working on projects, we often need additional packages; thus, it is an essential tool for developers.</li>
+                </ul>
+            
+                <h2>How to Install PIP?</h2>
+                <ul>
+                    <li>PIP has been included with the Python installer since version 3.4 unless you are using an older version.</li>
+                    <li>To use PIP, you need to install Python, which comes with PIP included.</li>
+                </ul>
+            
+                <h2>How to Verify PIP is Installed or Not?</h2>
+                <p>By running the following commands:</p>
+                <ul>
+                    <li><code>pip --version</code>: This command shows the version of PIP installed, along with the Python version it's associated with and the location of the PIP installation.</li>
+                    <li><code>pip -V</code>: This is shorthand for <code>pip --version</code> and gives the same output.</li>
+                    <li><code>py -m pip --version</code>: This command tells Python to run the PIP module using the Python executable (py) installed on your system. It shows the PIP version, the associated Python version, and the location where PIP is installed. This command is particularly useful if you have multiple versions of Python installed.</li>
+                </ul>
+                <p><strong>Note:</strong> The key difference is that <code>py -m pip --version</code> explicitly invokes PIP through the py launcher, ensuring that PIP runs within the context of a specific Python version.</p>
+            
+                <h2>Comprehensive PIP Commands List</h2>
+                <ul>
+                    <li><code>pip install package_name</code> – Used to install a package.</li>
+                    <li><code>pip install --upgrade package_name</code> – Used to upgrade an installed package.</li>
+                    <li><code>pip uninstall package_name</code> – Used to uninstall a package.</li>
+                    <li><code>pip list</code> – Used to list installed packages.</li>
+                    <li><code>pip show package_name</code> – Used to show details about a specific package.</li>
+                    <li><code>pip freeze > requirements.txt</code> – Used to freeze installed packages to a requirements file.</li>
+                    <li><code>pip install -r requirements.txt</code> – Used to install packages from a requirements file.</li>
+                    <li><code>pip list --outdated</code> – Used to check for outdated packages.</li>
+                    <li><code>pip check</code> – Used to verify installed packages have compatible dependencies.</li>
+                    <li><code>pip search search_term</code> – Used to search for packages by name.</li>
+                    <li><code>pip install --no-cache-dir package_name</code> – Used to install a package without using the cache.</li>
+                    <li><code>pip install --user package_name</code> – Used to install a package for the current user only.</li>
+                    <li><code>pip wheel package_name</code> – Used to create a wheel distribution of a package.</li>
+                    <li><code>pip uninstall -y package_name</code> – Used to uninstall a package without prompting for confirmation.</li>
+                </ul>
+            
+                <h2>Installing Packages with PIP</h2>
+                <p>Whenever we use the PIP command to install a package, it can be sourced from two main places:</p>
+                <ol>
+                    <li><strong>Online Repositories:</strong> (PyPI & GitHub)
+                        <p>To install packages from PyPI, you can use the command <code>pip install &lt;package_name&gt;</code>. Make sure you are connected to the internet.</p>
+                    </li>
+                    <li><strong>Distribution Files:</strong> Packages can be installed from local distribution files (tar files, wheel files, etc.) stored on your computer.
+                        <ul>
+                            <li>To install a Wheel (.whl) File: <code>pip install path/to/your-package.whl</code></li>
+                            <li>To install a Source Distribution (.tar.gz) File: <code>pip install path/to/your-package.tar.gz</code></li>
+                        </ul>
+                    </li>
+                </ol>
+            
+                <h2>How to Check Dependency of One Package on Another</h2>
+                <p>To check if a package depends on another, use the command:</p>
+                <p><code>pip show package_name</code> to find the dependencies of the specified package. Look for <strong>Requires</strong> in the output.</p>
+            </div>
+        </div>
+  
+    
+    </div>
+  
+  </section>
+  
+
+{% endblock %}

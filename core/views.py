@@ -7,3 +7,7 @@ def home(request):
 
 def blog_list(request):
     return render(request, 'core/blog_list.html')
+
+def resource_details(request):
+    return render(request, 'core/resource_details.html')
+    
