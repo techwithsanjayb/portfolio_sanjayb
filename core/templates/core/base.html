@@ -50,12 +50,12 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#resume">Resume</a></li>
-          <li><a href="#services">Services</a></li>
+          <li><a href="{% url 'core:home' %}">About</a></li>
+          <li><a href="{% url 'core:home' %}">Resume</a></li>
+          <li><a href="{% url 'core:home' %}">Services</a></li>
           <li><a href="{% url 'core:article_list' %}">Articles</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="{% url 'core:home' %}">Work</a></li>
+          <li><a href="{% url 'core:home' %}">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
