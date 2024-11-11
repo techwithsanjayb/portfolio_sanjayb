@@ -84,6 +84,7 @@
                         <strong>Last updated:</strong> {{ article.updated_date|date:"F j, Y" }}
                       </small>
                     </p>
+                    
 
                     <!-- Displaying a Shortened Body (Summary) -->
                     <p class="card-text">{{ article.body|safe|slice:":100" }}...</p> <!-- First 100 characters of body -->

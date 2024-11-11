@@ -41,6 +41,10 @@ def article_list(request):
             Q(title__icontains=search_term) | Q(body__icontains=search_term)
         )
 
+    # Order by creation date (assuming `created_at` is the field tracking article creation)
+    article_data = article_data.order_by('-published_date')  # This orders the articles in descending order
+
+
     # Check if no articles match the filters
     if not article_data.exists():
         no_articles_found = True
