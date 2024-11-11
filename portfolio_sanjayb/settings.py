@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',''
-    'core'
+    'core',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
@@ -74,12 +75,27 @@ WSGI_APPLICATION = 'portfolio_sanjayb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+import pymysql
+pymysql.install_as_MySQLdb()
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'portfolio_sanjayb',
+        'USER': 'root',
+        'PASSWORD': 'g!$t',
+        'HOST': 'db1-staging.pune.cdac.in',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
+            'charset': 'utf8mb4',
+            # No SSL options here (remove any SSL configuration if present)
+        }
+    },
 }
+
+
 
 
 # Password validation

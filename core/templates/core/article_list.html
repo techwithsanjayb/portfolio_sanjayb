@@ -1,0 +1,170 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block article_list %}
+  <!-- About Section -->
+  <section id="about" class="about section mt-5">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <span class="description-title">My Articles</span>
+      <h2>My Articles</h2>
+      <p>Delivering technology-driven solutions that add real value.</p>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+      <div class="row">
+        <!-- Left Section for Filters and Search -->
+        <div class="col-md-3">
+          <!-- Search and Filter Form -->
+          <form method="get" action="{% url 'core:article_list' %}" class="mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Filter Articles</h5>
+
+                <!-- Search Input: Move this section before the category filter -->
+                <div class="form-group mt-3">
+                  <input type="text" name="search" class="form-control" placeholder="Search articles..." value="{{ search_term|default:'' }}">
+                </div>
+
+                <!-- Category Filter: Checkboxes -->
+                <fieldset class="mt-3">
+                  <legend>Select Categories</legend>
+                  {% for category in categories %}
+                    <div class="form-check">
+                      <input type="checkbox" name="category" value="{{ category.id }}" 
+                             {% if category.id|stringformat:"s" in selected_categories %}checked{% endif %} 
+                             class="form-check-input">
+                      <label class="form-check-label">{{ category.name }}</label>
+                    </div>
+                  {% endfor %}
+                </fieldset>
+
+                <!-- Buttons (Apply Filters and Reset) -->
+                <div class="form-group mt-3">
+                  <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                </div>
+                <div class="form-group mt-2">
+                  <a href="{% url 'core:article_list' %}" class="btn btn-secondary w-100">Reset Filters</a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div><!-- End Left Section -->
+
+        <!-- Right Section for Article List -->
+        <div class="col-md-9">
+          <!-- If no articles are found, display this message -->
+          {% if no_articles_found %}
+            <div class="alert alert-warning" role="alert">
+              No articles found with the selected filters. Please try again with different criteria.
+            </div>
+          {% endif %}
+
+          <!-- Article List -->
+          <div class="row gy-4">
+            {% for article in article_obj %}
+              <div class="col-xl-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+                <div class="card shadow-sm border-light" style="width: 100%;"> <!-- Article Card -->
+
+                  <!-- Displaying Article Thumbnail Image if it exists -->
+                  {% if article.article_thumbnail_image %}
+                    <img src="{{ article.article_thumbnail_image.url }}" alt="{{ article.title }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                  {% endif %}
+
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <a href="{% url 'core:article_detail' article.id %}" class="stretched-link">{{ article.title }}</a>
+                    </h5>
+                    
+                    <!-- Displaying Published and Last Updated Dates -->
+                    <p class="text-muted">
+                      <small>
+                        <strong>Uploaded on:</strong> {{ article.published_date|date:"F j, Y" }} |
+                        <strong>Last updated:</strong> {{ article.updated_date|date:"F j, Y" }}
+                      </small>
+                    </p>
+
+                    <!-- Displaying a Shortened Body (Summary) -->
+                    <p class="card-text">{{ article.body|safe|slice:":100" }}...</p> <!-- First 100 characters of body -->
+
+                    <!-- Optionally, you can add a "Read More" link to the article detail page -->
+                    <a href="{% url 'core:article_detail' article.id %}" class="btn btn-primary">Read More</a>
+                  </div>
+                </div>
+              </div><!-- End Card Item -->
+            {% endfor %}
+          </div><!-- End Article List -->
+
+          <!-- Pagination -->
+          <div class="pagination mt-4">
+            <span class="step-links">
+              {% if article_obj.has_previous %}
+                <a href="?page=1{% if selected_categories %}{% for category in selected_categories %}&category={{ category }}{% endfor %}{% endif %}{% if search_term %}&search={{ search_term }}{% endif %}">« first</a>
+                <a href="?page={{ article_obj.previous_page_number }}{% if selected_categories %}{% for category in selected_categories %}&category={{ category }}{% endfor %}{% endif %}{% if search_term %}&search={{ search_term }}{% endif %}">prev</a>
+              {% endif %}
+
+              <!-- Page Numbers -->
+              {% for page_num in article_obj.paginator.page_range %}
+                {% if article_obj.number == page_num %}
+                  <span class="current-page">{{ page_num }}</span> <!-- Current page (active) -->
+                {% else %}
+                  <a href="?page={{ page_num }}{% if selected_categories %}{% for category in selected_categories %}&category={{ category }}{% endfor %}{% endif %}{% if search_term %}&search={{ search_term }}{% endif %}">{{ page_num }}</a>
+                {% endif %}
+              {% endfor %}
+
+              {% if article_obj.has_next %}
+                <a href="?page={{ article_obj.next_page_number }}{% if selected_categories %}{% for category in selected_categories %}&category={{ category }}{% endfor %}{% endif %}{% if search_term %}&search={{ search_term }}{% endif %}">next</a>
+                <a href="?page={{ article_obj.paginator.num_pages }}{% if selected_categories %}{% for category in selected_categories %}&category={{ category }}{% endfor %}{% endif %}{% if search_term %}&search={{ search_term }}{% endif %}">last »</a>
+              {% endif %}
+            </span>
+          </div><!-- End Pagination -->
+        </div><!-- End Right Section -->
+
+      </div><!-- End Row -->
+    </div><!-- End Container -->
+  </section><!-- End About Section -->
+
+  <style type="text/css">
+    .form-check-label {
+      font-size: 14px;
+    }
+  
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  
+    .pagination .current-page {
+      font-weight: bold;
+      background-color: #007bff;
+      color: white;
+      border: 1px solid #007bff;
+    }
+  
+    .pagination a {
+      margin: 0 5px;
+      padding: 5px 10px;
+      text-decoration: none;
+      color: #007bff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+  
+    .pagination a:hover {
+      background-color: #f0f0f0;
+    }
+
+    .card-body .text-muted {
+      font-size: 0.875rem; /* Smaller font size for the date info */
+      color: #6c757d; /* Subtle muted color */
+    }
+
+    .card-body .card-title a {
+      font-weight: 600;
+      font-size: 1.125rem; /* Slightly larger font for the article title */
+    }
+  </style>
+
+{% endblock %}

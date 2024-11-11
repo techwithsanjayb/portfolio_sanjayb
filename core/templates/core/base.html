@@ -53,7 +53,7 @@
           <li><a href="#about">About</a></li>
           <li><a href="#resume">Resume</a></li>
           <li><a href="#services">Services</a></li>
-          <li><a href="#blogs">Blogs</a></li>
+          <li><a href="{% url 'core:article_list' %}">Articles</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -76,11 +76,15 @@
     {% endblock %}
 
     
-    {% block blog_list %}
+    {% block article_list %}
     {% endblock %}
 
     {% block resource_details %}
     {% endblock %}
+
+    {% block article_detail %}
+    {% endblock %}
+
 
   </main>
 

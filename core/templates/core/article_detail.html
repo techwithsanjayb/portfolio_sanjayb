@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block article_detail %}
+  <!-- Article Detail Section -->
+  <section id="article-detail" class="article-detail section mt-5">
+    <div class="container">
+      <!-- Article Title and Date -->
+      <div class="section-title" data-aos="fade-up">
+        <h2>{{ article_obj.title }}</h2>
+        <p class="text-muted">
+          <small>
+            <strong>Uploaded on:</strong> {{ article_obj.published_date|date:"F j, Y" }} |
+            <strong>Last updated:</strong> {{ article_obj.updated_date|date:"F j, Y" }}
+          </small>
+        </p>
+      </div><!-- End Section Title -->
+
+      <!-- Article Body -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="article-content" data-aos="fade-up" data-aos-delay="100">
+            <p>{{ article_obj.body|safe }}</p> <!-- Full article body -->
+          </div>
+        </div>
+      </div><!-- End Row -->
+    </div><!-- End Container -->
+  </section><!-- End Article Detail Section -->
+
+  <!-- Optional: Add a "Back to Articles" button -->
+  <div class="text-center mt-4">
+    <a href="{% url 'core:article_list' %}" class="btn btn-secondary">Back to Articles</a>
+  </div>
+  
+{% endblock %}
