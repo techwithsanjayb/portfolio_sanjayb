@@ -5,6 +5,7 @@ app_name = 'core'
 
 urlpatterns = [
     path('',views.home, name="home"),
+    path('home2',views.home2, name="home"),
     path('article_list', views.article_list, name="article_list"),
     # Define the article detail URL pattern
     path('article_detail/<int:id>', views.article_detail, name='article_detail'),

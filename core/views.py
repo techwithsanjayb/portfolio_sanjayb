@@ -8,6 +8,9 @@ from django.db.models import Q
 def home(request):
     return render(request, 'core/home.html')
 
+def home2(request):
+    return render(request, 'core/home2.html')
+
 def article_list(request):
     # Get all article categories for filtering options
     categories = article_category.objects.all()
